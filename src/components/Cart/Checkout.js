@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 
 import classes from "./Checkout.module.css";
 
-const isEmpty = value => value.trim().length === "";
-const isFiveChars = value => value.trim().length === 5;
+const isEmpty = (value) => value.trim() === '';
+const isFiveChars = (value) => value.trim().length === 5;
 
 const Checkout = (props) => {
 
@@ -26,11 +26,13 @@ const Checkout = (props) => {
     const enteredStreet = streetInputRef.current.value;
     const enteredPostalCode = postalCodeInputRef.current.value;
     const enteredCity = cityInputRef.current.value;
-
+    
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
     const enteredCityIsValid = !isEmpty(enteredCity);
     const enteredPostalCodeIsValid = isFiveChars(enteredPostalCode);
+
+    console.log(enteredNameIsValid)
 
     setFormInputsValidity({
       name: enteredNameIsValid,
@@ -38,7 +40,7 @@ const Checkout = (props) => {
       city: enteredCityIsValid,
       postalCode: enteredPostalCodeIsValid
     });
-
+    console.log(formInputsValidity.name)
     const formIsValid =
       enteredNameIsValid &&
       enteredStreetIsValid &&
@@ -46,6 +48,7 @@ const Checkout = (props) => {
       enteredPostalCodeIsValid;
 
       if (!formIsValid) {
+        console.log(formIsValid)
        return;
       }
 
@@ -67,10 +70,12 @@ const Checkout = (props) => {
       <div className={classes.control}>
         <label htmlFor="postal">Postal Code</label>
         <input type="text" id="postal" ref={postalCodeInputRef} />
+        {!formInputsValidity.postalCode && <p>Please enter a valid postal code</p>}
       </div>
       <div className={classes.control}>
         <label htmlFor="city">City</label>
         <input type="text" id="city" ref={cityInputRef} />
+        {!formInputsValidity.city && <p>Please enter a valid city</p>}
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
