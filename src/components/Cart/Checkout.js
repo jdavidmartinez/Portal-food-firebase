@@ -1,32 +1,42 @@
-import classes from "./Checkout.module.css";
+import { useRef } from 'react';
+
+import classes from './Checkout.module.css';
 
 const Checkout = (props) => {
-    const confirmHandler = (event) => {
-        event.preventDefault();
-    };
 
-    
+  const nameInputRef = useRef();
+  const streetInputRef = useRef();
+  const postaCodelInputRef = useRef();
+  const cityInputRef = useRef();
+
+  const confirmHandler = (event) => {
+    event.preventDefault();
+  };
 
   return (
-    <form onSubmit={confirmHandler}>
+    <form className={classes.form} onSubmit={confirmHandler}>
       <div className={classes.control}>
-        <label htmlFor="name">Nombre</label>
-        <input type="text" id="name" />
+        <label htmlFor='name'>Your Name</label>
+        <input type='text' id='name' ref={nameInputRef} />
       </div>
       <div className={classes.control}>
-        <label htmlFor="street">Direccion</label>
-        <input type="text" id="street" />
+        <label htmlFor='street'>Street</label>
+        <input type='text' id='street' ref={streetInputRef}/>
       </div>
       <div className={classes.control}>
-        <label htmlFor="phone">Telefono</label>
-        <input type="text" id="phone" />
+        <label htmlFor='postal'>Postal Code</label>
+        <input type='text' id='postal' ref={postaCodelInputRef} />
       </div>
       <div className={classes.control}>
-        <label htmlFor="city">Ciudad</label>
-        <input type="text" id="city" />
+        <label htmlFor='city'>City</label>
+        <input type='text' id='city' ref={cityInputRef}/>
       </div>
-      <button type="text" onClick={props.onCancel}>Cancelar</button>
-      <button>Confirmar</button>
+      <div className={classes.actions}>
+        <button type='button' onClick={props.onCancel}>
+          Cancel
+        </button>
+        <button className={classes.submit}>Confirm</button>
+      </div>
     </form>
   );
 };
