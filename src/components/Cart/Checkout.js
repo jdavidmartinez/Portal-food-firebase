@@ -4,6 +4,9 @@ const Checkout = (props) => {
     const confirmHandler = (event) => {
         event.preventDefault();
     };
+
+    
+
   return (
     <form onSubmit={confirmHandler}>
       <div className={classes.control}>
